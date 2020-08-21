@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory, Route } from "react-router-dom";
+import AddColor from "./AddColor";
 
 const initialColor = {
   color: "",
@@ -7,6 +9,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
+  const history = useHistory();
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -34,11 +37,11 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = (color) => {
-    // make a delete request to delete this color    
+    // make a delete request to delete this color
     axiosWithAuth()
-    .delete(`/colors/${color.id}`)
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+      .delete(`/colors/${color.id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -47,7 +50,7 @@ const ColorList = ({ colors, updateColors }) => {
       <ul>
         {colors.map((color) => (
           <li key={color.color} onClick={() => editColor(color)}>
-            <span data-testid='colors'>
+            <span data-testid="colors">
               <span
                 className="delete"
                 onClick={(e) => {
@@ -96,6 +99,7 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
+      <AddColor updateColors={updateColors} />
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
     </div>

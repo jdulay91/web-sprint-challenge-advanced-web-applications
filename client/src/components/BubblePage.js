@@ -4,6 +4,8 @@ import axios from "axios";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import AddColor from './AddColor'
+import {Route} from 'react-router-dom'
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
@@ -22,6 +24,8 @@ const BubblePage = () => {
     <>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
+  
+      
     </>
   );
 };
