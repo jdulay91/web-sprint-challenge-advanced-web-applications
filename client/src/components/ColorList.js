@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
@@ -36,8 +34,7 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = (color) => {
-    // make a delete request to delete this color
-    
+    // make a delete request to delete this color    
     axiosWithAuth()
     .delete(`/colors/${color.id}`)
     .then((res)=>console.log(res))
@@ -50,7 +47,7 @@ const ColorList = ({ colors, updateColors }) => {
       <ul>
         {colors.map((color) => (
           <li key={color.color} onClick={() => editColor(color)}>
-            <span>
+            <span data-testid='colors'>
               <span
                 className="delete"
                 onClick={(e) => {
